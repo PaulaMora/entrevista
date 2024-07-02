@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { getCharacters } from './api';
 import { Character } from './types';
 
+interface CharacterListProps {
+  onCharacterClick: (character: Character) => void;
+}
 
-// Componente para listar personajes
-const CharacterList: React.FC = () => {
+const CharacterList: React.FC<CharacterListProps> = ({ onCharacterClick }) => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +32,11 @@ const CharacterList: React.FC = () => {
   return (
     <div className="character-list">
       {characters.map((character) => (
-        <div key={character.id} className="character-card">
+        <div
+          key={character.id}
+          className="character-card"
+          onClick={() => onCharacterClick(character)}
+        >
           <img src={character.images.main} alt={`${character.name.first} ${character.name.last}`} />
           <h2>{`${character.name.first} ${character.name.last}`}</h2>
         </div>
