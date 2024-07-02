@@ -10,7 +10,6 @@ interface CharacterDetailProps {
 function CharacterDetail({ character, onBackClick }: CharacterDetailProps) {
   return (
     <div className="character-detail">
-      <button type="button" onClick={onBackClick}>Back</button>
       <img src={character.images.main} alt={`${character.name.first} ${character.name.middle} ${character.name.last}`} />
       <div className="character-detail-content">
         <h2>{`${character.name.first} ${character.name.last}`}</h2>
@@ -38,6 +37,7 @@ function CharacterDetail({ character, onBackClick }: CharacterDetailProps) {
             ))}
           </ul>
         </div>
+        <button type="button" onClick={onBackClick}>Atrás</button>
       </div>
     </div>
   );
