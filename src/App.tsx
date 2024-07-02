@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './App.css';
 import CharacterList from './CharacterList';
 import CharacterDetail from './CharacterDetail';
 import { Character } from './types';
+import './App.css';
 
-const App: React.FC = () => {
+function App() {
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
   const handleCharacterClick = (character: Character) => {
@@ -19,12 +19,16 @@ const App: React.FC = () => {
     <div className="App">
       <h1>Futurama Characters</h1>
       {selectedCharacter ? (
-        <CharacterDetail character={selectedCharacter} onBackClick={handleBackClick} />
+        <div className="content-container">
+          <CharacterDetail character={selectedCharacter} onBackClick={handleBackClick} />
+        </div>
       ) : (
-        <CharacterList onCharacterClick={handleCharacterClick} />
+        <div className="content-container">
+          <CharacterList onCharacterClick={handleCharacterClick} />
+        </div>
       )}
     </div>
   );
-};
+}
 
 export default App;

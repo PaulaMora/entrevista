@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getCharacters } from './api';
 import { Character } from './types';
+import './CharacterList.css';
 
 interface CharacterListProps {
   onCharacterClick: (character: Character) => void;
 }
 
-const CharacterList: React.FC<CharacterListProps> = ({ onCharacterClick }) => {
+function CharacterList({ onCharacterClick }: CharacterListProps) {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,19 +31,26 @@ const CharacterList: React.FC<CharacterListProps> = ({ onCharacterClick }) => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="character-list">
-      {characters.map((character) => (
-        <div
-          key={character.id}
-          className="character-card"
-          onClick={() => onCharacterClick(character)}
-        >
-          <img src={character.images.main} alt={`${character.name.first} ${character.name.last}`} />
-          <h2>{`${character.name.first} ${character.name.last}`}</h2>
-        </div>
-      ))}
+    <div className="character-list-container">
+      <div className="character-list">
+        {characters.map((character) => (
+          <div
+            key={character.id}
+            className="character-card"
+            onClick={() => onCharacterClick(character)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') onCharacterClick(character);
+            }}
+            role="button"
+            tabIndex={0}
+          >
+            <img src={character.images.main} alt={`${character.name.first} ${character.name.last}`} />
+            <h2>{`${character.name.first} ${character.name.last}`}</h2>
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
+}
 
 export default CharacterList;
