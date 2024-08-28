@@ -2,8 +2,19 @@
   background-color: white;
   color: #282c34;
 }
+
 .App {
   padding: 40px;
+}
+.App-header {
+  display: flex;
+  justify-content: center; /* Centra el logo horizontalmente */
+  align-items: center; /* Centra el logo verticalmente */
+}
+
+.App-logo {
+  max-width: 500px; /* Ajusta el tamaño del logo */
+  height: auto;
 }
 
 

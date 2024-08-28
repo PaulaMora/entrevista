@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Character } from './types';
 import './CharacterDetail.css';
 
@@ -8,6 +8,12 @@ interface CharacterDetailProps {
 }
 
 function CharacterDetail({ character, onBackClick }: CharacterDetailProps) {
+  const [showFullSayings, setShowFullSayings] = useState(false);
+
+  const toggleSayings = () => {
+    setShowFullSayings(!showFullSayings);
+  };
+
   return (
     <div className="character-detail">
       <img src={character.images.main} alt={`${character.name.first} ${character.name.middle} ${character.name.last}`} />
@@ -31,13 +37,19 @@ function CharacterDetail({ character, onBackClick }: CharacterDetailProps) {
         </p>
         <div>
           <h3>Sayings:</h3>
-          <ul>
+          <ul className={`character-sayings ${showFullSayings ? 'expanded' : 'collapsed'}`}>
             {character.sayings.map((saying) => (
               <li key={saying}>{saying}</li>
             ))}
           </ul>
+
+          {character.sayings.length > 1 && (
+            <button type="button" onClick={toggleSayings}>
+              {showFullSayings ? 'Ver menos' : 'Ver más'}
+            </button>
+          )}
         </div>
-        <button type="button" onClick={onBackClick}>Atrás</button>
+        <button type="button" className="close" onClick={onBackClick}>Cerrar</button>
       </div>
     </div>
   );

@@ -34,17 +34,18 @@ function CharacterList({ onCharacterClick }: CharacterListProps) {
     <div className="character-list-container">
       <div className="character-list">
         {characters.map((character) => (
-          <div
-            key={character.id}
-            className="character-card"
-            onClick={() => onCharacterClick(character)}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') onCharacterClick(character);
-            }}
-            role="button"
-            tabIndex={0}
-          >
-            <img src={character.images.main} alt={`${character.name.first} ${character.name.last}`} />
+          <div key={character.id} className="character-container">
+            <div
+              className="character-card"
+              onClick={() => onCharacterClick(character)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') onCharacterClick(character);
+              }}
+              role="button"
+              tabIndex={0}
+            >
+              <img src={character.images.main} alt={`${character.name.first} ${character.name.last}`} />
+            </div>
             <h2>{`${character.name.first} ${character.name.last}`}</h2>
           </div>
         ))}
